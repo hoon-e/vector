@@ -329,7 +329,10 @@ pub async fn sign_request(
         request,
         credentials_provider,
         region,
-        *service_type == OpenSearchServiceType::Serverless,
+        matches!(
+            *service_type,
+            OpenSearchServiceType::Serverless | OpenSearchServiceType::Managed
+        ),
     )
     .await
 }
